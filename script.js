@@ -1,10 +1,10 @@
-// ── Clock (fixed narrative time — ticks forward from there; editable via the content editor) ──
+// ── Narrative snapshot anchor (28. 3. 2026 16:47) — used only for the YouTube feed's
+// "před X dny" labels, which stay pinned to the story's snapshot moment. The visible
+// taskbar/lock-screen clock below shows real live time instead, so it's never stale.
 const CLOCK_CONTENT = {
   "date": "28. 3. 2026",
   "time": "16:47"
 };
-let SIMULATED_CLOCK_BASE = 0;
-let CLOCK_START_REAL = 0;
 function parseClockBase() {
   const dateParts = CLOCK_CONTENT.date.match(/(\d+)\D+(\d+)\D+(\d+)/);
   const timeParts = CLOCK_CONTENT.time.match(/(\d+):(\d+)/);
@@ -12,14 +12,12 @@ function parseClockBase() {
   return new Date(Number(dateParts[3]), Number(dateParts[2]) - 1, Number(dateParts[1]), Number(timeParts[1]), Number(timeParts[2]), 0).getTime();
 }
 function updateClock() {
-  const simulated = new Date(SIMULATED_CLOCK_BASE + (Date.now() - CLOCK_START_REAL));
-  const h = String(simulated.getHours()).padStart(2, '0');
-  const m = String(simulated.getMinutes()).padStart(2, '0');
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2, '0');
+  const m = String(now.getMinutes()).padStart(2, '0');
   document.getElementById('taskbar-time').textContent = `${h}:${m}`;
 }
 function startClock() {
-  SIMULATED_CLOCK_BASE = parseClockBase();
-  CLOCK_START_REAL = Date.now();
   updateClock();
   setInterval(updateClock, 10000);
 }
@@ -6947,13 +6945,14 @@ const CZ_WEEKDAYS = ['neděle', 'pondělí', 'úterý', 'středa', 'čtvrtek', '
 const CZ_MONTHS_GENITIVE = ['ledna', 'února', 'března', 'dubna', 'května', 'června', 'července', 'srpna', 'září', 'října', 'listopadu', 'prosince'];
 
 function renderLockScreenClock() {
-  const d = new Date(parseClockBase());
+  const d = new Date();
   const h = String(d.getHours()).padStart(2, '0');
   const m = String(d.getMinutes()).padStart(2, '0');
   document.getElementById('lock-time').textContent = `${h}:${m}`;
   document.getElementById('lock-date').textContent = `${CZ_WEEKDAYS[d.getDay()]} ${d.getDate()}. ${CZ_MONTHS_GENITIVE[d.getMonth()]}`;
 }
 renderLockScreenClock();
+setInterval(renderLockScreenClock, 10000);
 
 function revealDesktop() {
   startClock();
