@@ -6985,3 +6985,92 @@ document.getElementById('lock-screen').addEventListener('click', dismissLockScre
 document.addEventListener('keydown', () => {
   if (!lockScreenDismissed) dismissLockScreen();
 });
+
+// ══════════════════════════════════════════════════════════════════════════
+// Battery drain simulation: runs from page load regardless of lock-screen
+// state, independent of every other section's data/logic. ?speedtest=1
+// compresses the whole 2h cycle into 30s at identical proportions — the
+// only effect that query param has anywhere in the app, and it touches no
+// storage, so removing it (or reloading) leaves nothing behind.
+// ══════════════════════════════════════════════════════════════════════════
+(function initBatterySimulation() {
+  const isSpeedtest = new URLSearchParams(window.location.search).get('speedtest') === '1';
+  const TOTAL_MS = isSpeedtest ? 30 * 1000 : 7200 * 1000;
+  const LOW_TOAST_MS = TOTAL_MS * (6300 / 7200);
+  const CRITICAL_TOAST_MS = TOTAL_MS * (7100 / 7200);
+
+  const batteryEl = document.getElementById('systray-battery');
+  const fillRect = document.getElementById('battery-fill-rect');
+  const pctLabel = document.getElementById('systray-battery-pct');
+  const toast = document.getElementById('battery-toast');
+  const toastIcon = toast.querySelector('.battery-toast-icon');
+  const toastTitle = document.getElementById('battery-toast-title');
+  const toastText = document.getElementById('battery-toast-text');
+  const toastCloseBtn = document.getElementById('battery-toast-close');
+  const shutdownOverlay = document.getElementById('battery-shutdown-overlay');
+  const shutdownText = document.getElementById('battery-shutdown-text');
+
+  const FILL_MAX_WIDTH = 16;
+  const startTime = Date.now();
+  let updateTimer = null;
+  let shutdownStarted = false;
+
+  function renderBatteryLevel(pct) {
+    fillRect.setAttribute('width', Math.max(0, (pct / 100) * FILL_MAX_WIDTH).toFixed(2));
+    pctLabel.textContent = `${pct}%`;
+    batteryEl.title = `Baterie: ${pct} %`;
+    batteryEl.classList.toggle('battery-level-critical', pct < 10);
+    batteryEl.classList.toggle('battery-level-low', pct >= 10 && pct <= 20);
+  }
+
+  let toastHideTimer = null;
+  function showBatteryToast(title, text, critical) {
+    clearTimeout(toastHideTimer);
+    toastTitle.textContent = title;
+    toastText.textContent = text;
+    toast.classList.toggle('battery-toast-critical', !!critical);
+    toast.classList.remove('hidden');
+    requestAnimationFrame(() => toast.classList.add('show'));
+    toastHideTimer = setTimeout(hideBatteryToast, 8000);
+  }
+  function hideBatteryToast() {
+    clearTimeout(toastHideTimer);
+    toast.classList.remove('show');
+    setTimeout(() => toast.classList.add('hidden'), 300);
+  }
+  toastCloseBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    hideBatteryToast();
+  });
+
+  function runShutdown() {
+    if (shutdownStarted) return;
+    shutdownStarted = true;
+    clearInterval(updateTimer);
+    hideBatteryToast();
+    renderBatteryLevel(0);
+    shutdownOverlay.classList.add('active');
+    setTimeout(() => {
+      shutdownText.classList.add('show');
+      setTimeout(() => {
+        shutdownText.classList.remove('show');
+      }, 2500);
+    }, 1500);
+  }
+
+  function tick() {
+    const elapsed = Date.now() - startTime;
+    if (elapsed >= TOTAL_MS) {
+      runShutdown();
+      return;
+    }
+    const pct = Math.max(0, Math.round(100 - (elapsed / TOTAL_MS) * 100));
+    renderBatteryLevel(pct);
+  }
+
+  renderBatteryLevel(100);
+  updateTimer = setInterval(tick, 200);
+  setTimeout(() => showBatteryToast('Baterie je slabá', '10 % zbývá, zvažte připojení nabíječky', false), LOW_TOAST_MS);
+  setTimeout(() => showBatteryToast('Kritická úroveň baterie', 'Počítač se za chvíli vypne', true), CRITICAL_TOAST_MS);
+  setTimeout(runShutdown, TOTAL_MS);
+})();

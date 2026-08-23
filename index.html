@@ -100,9 +100,9 @@
           <span class="systray-icon" title="Hlasitost">
             <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M4 9v6h4l5 5V4L8 9zm11.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
           </span>
-          <span class="systray-icon systray-battery" title="Baterie: 34 %">
-            <svg viewBox="0 0 24 12" width="20" height="10"><rect x="1" y="1" width="19" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="21" y="4" width="2" height="4" rx="1" fill="currentColor"/><rect x="2.5" y="2.5" width="6.5" height="7" rx="1" fill="currentColor"/></svg>
-            <span class="systray-battery-pct">34%</span>
+          <span class="systray-icon systray-battery" id="systray-battery" title="Baterie: 100 %">
+            <svg viewBox="0 0 24 12" width="20" height="10"><rect x="1" y="1" width="19" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="21" y="4" width="2" height="4" rx="1" fill="currentColor"/><rect id="battery-fill-rect" x="2.5" y="2.5" width="16" height="7" rx="1" fill="currentColor"/></svg>
+            <span class="systray-battery-pct" id="systray-battery-pct">100%</span>
           </span>
         </div>
         <span id="taskbar-time"></span>
@@ -122,6 +122,21 @@
         <div class="toast-title" id="toast-title"></div>
         <div class="toast-text" id="toast-text"></div>
       </div>
+    </div>
+
+    <!-- Battery low/critical notification (Windows 11 style) -->
+    <div id="battery-toast" class="hidden">
+      <svg class="battery-toast-icon" viewBox="0 0 24 12" width="26" height="13"><rect x="1" y="1" width="19" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="21" y="4" width="2" height="4" rx="1" fill="currentColor"/><rect x="2.5" y="2.5" width="4" height="7" rx="1" fill="currentColor"/></svg>
+      <div class="battery-toast-body">
+        <div class="battery-toast-title" id="battery-toast-title"></div>
+        <div class="battery-toast-text" id="battery-toast-text"></div>
+      </div>
+      <button class="battery-toast-close" id="battery-toast-close" title="Zavřít" aria-label="Zavřít">✕</button>
+    </div>
+
+    <!-- Battery depleted shutdown overlay -->
+    <div id="battery-shutdown-overlay">
+      <span id="battery-shutdown-text">Vypínání...</span>
     </div>
 
   </div>
