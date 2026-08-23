@@ -5525,6 +5525,11 @@ function openPhotoModal(f, filesOverride, source) {
   photosModalInfoPanel.classList.add('hidden');
   renderPhotoModalContent(f);
   photosModalOverlay.classList.remove('hidden');
+  // Was a static CSS z-index (1010) instead of joining the shared topWindowZIndex
+  // counter every other window uses — harmless while that counter stays low, but
+  // once enough window-focus events accumulate in a session it climbs past 1010
+  // and windows opened/focused afterward render above this modal instead of under it.
+  bringWindowToFront(photosModalOverlay);
 }
 
 function navigatePhotoModal(dir) {
