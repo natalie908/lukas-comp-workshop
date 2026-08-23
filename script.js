@@ -1520,6 +1520,33 @@ function openHistory() {
   closeChromeMenu();
 }
 
+// ── First-open scenario: Lukas's aborted attempt to clear browsing history ──
+const chromeClearHistoryDialog = document.getElementById('chrome-clear-history-dialog');
+const chromeHistoryErrorBanner = document.getElementById('chrome-history-error-banner');
+let chromeErrorBannerTimer = null;
+
+function showClearHistoryDialog() {
+  chromeClearHistoryDialog.classList.remove('hidden');
+}
+function hideClearHistoryDialog() {
+  chromeClearHistoryDialog.classList.add('hidden');
+}
+function hideChromeHistoryErrorBanner() {
+  clearTimeout(chromeErrorBannerTimer);
+  chromeHistoryErrorBanner.classList.add('hidden');
+}
+function showChromeHistoryErrorBanner() {
+  chromeHistoryErrorBanner.classList.remove('hidden');
+  clearTimeout(chromeErrorBannerTimer);
+  chromeErrorBannerTimer = setTimeout(hideChromeHistoryErrorBanner, 5000);
+}
+document.getElementById('chrome-clear-history-cancel').addEventListener('click', hideClearHistoryDialog);
+document.getElementById('chrome-clear-history-confirm').addEventListener('click', () => {
+  hideClearHistoryDialog();
+  setTimeout(showChromeHistoryErrorBanner, 700);
+});
+document.getElementById('chrome-history-error-banner-close').addEventListener('click', hideChromeHistoryErrorBanner);
+
 function closeChromeMenu() {
   chromeMenuDropdown.classList.add('hidden');
 }
@@ -3628,17 +3655,20 @@ function attachYoutubeShellHandlers() {
   searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
 }
 
+// Only the very first Chrome open of a session lands on History with the aborted
+// clear-data dialog; every later open (even after closing the window) resumes
+// wherever the tabs were left, like a real browser's session state. Doesn't
+// survive a page reload — chromeFirstOpenHandled resets along with everything else.
+let chromeFirstOpenHandled = false;
 function openChrome() {
   const wasHidden = chromeWindow.classList.contains('hidden');
   chromeWindow.classList.remove('hidden');
-  if (wasHidden) {
+  if (wasHidden && !chromeFirstOpenHandled) {
+    chromeFirstOpenHandled = true;
     TABS = makeInitialTabs();
-    activeTabId = 'chatgpt';
     activeConvIndex = 0;
-    renderTabbar();
-    updateAddressBar();
-    renderActivePage();
-    updateNavButtons();
+    openHistory();
+    showClearHistoryDialog();
   }
   bringWindowToFront(chromeWindow);
 }

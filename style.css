@@ -487,6 +487,73 @@ body {
   text-align: right;
 }
 
+/* ── First-open scenario: aborted "clear history" attempt ── */
+#chrome-clear-history-dialog {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+#chrome-clear-history-dialog.hidden { display: none; }
+.chrome-native-dialog {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+  width: 360px;
+  padding: 24px;
+  font-family: 'Google Sans', Roboto, Arial, sans-serif;
+}
+.chrome-native-dialog-title {
+  font-size: 15px;
+  color: #202124;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.chrome-native-dialog-actions { display: flex; justify-content: flex-end; gap: 8px; }
+.chrome-native-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-size: 13.5px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+.chrome-native-btn-secondary { background: none; color: #1a73e8; }
+.chrome-native-btn-secondary:hover { background: rgba(26,115,232,0.08); }
+.chrome-native-btn-primary { background: #1a73e8; color: #fff; }
+.chrome-native-btn-primary:hover { background: #1765cc; }
+
+.chrome-error-banner {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fce8e6;
+  border-bottom: 1px solid #f6c6c2;
+  color: #5f1412;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-family: 'Google Sans', Roboto, Arial, sans-serif;
+}
+.chrome-error-banner.hidden { display: none; }
+.chrome-error-banner-icon { flex-shrink: 0; color: #d93025; }
+.chrome-error-banner-text { flex: 1; }
+.chrome-error-banner-close {
+  background: none;
+  border: none;
+  color: #5f1412;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.chrome-error-banner-close:hover { background: rgba(0,0,0,0.06); }
+
 /* ── "Site can't be reached" error page ── */
 .chrome-error-page {
   height: 100%;
