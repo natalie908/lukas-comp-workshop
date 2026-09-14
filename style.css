@@ -958,6 +958,88 @@ body {
 .context-menu-item { padding: 8px 16px; cursor: pointer; }
 .context-menu-item:hover { background: #f1f3f4; }
 
+/* ── Koš: Windows-style "Obnovit soubor" dialog ── */
+#trash-restore-dialog {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+#trash-restore-dialog.show { opacity: 1; pointer-events: auto; }
+#trash-restore-dialog.hidden { display: none; }
+.trd-dialog {
+  width: 460px;
+  max-width: 92vw;
+  background: #242424;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transform: scale(0.95);
+  transition: transform 0.15s ease;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+#trash-restore-dialog.show .trd-dialog { transform: scale(1); }
+.trd-titlebar {
+  height: 32px;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  padding: 0 8px 0 14px;
+  font-size: 12px;
+  color: #c8c8c8;
+  flex-shrink: 0;
+}
+.trd-titlebar-name { flex: 1; }
+.trd-close {
+  width: 26px;
+  height: 24px;
+  background: none;
+  border: none;
+  color: #a0a0a0;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s, color 0.1s;
+}
+.trd-close:hover { background: #c42b1c; color: #fff; }
+.trd-body { display: flex; gap: 16px; padding: 20px 24px; }
+.trd-icon { width: 48px; height: 48px; flex-shrink: 0; object-fit: contain; margin-top: 2px; }
+.trd-text { min-width: 0; flex: 1; }
+.trd-question { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 8px; }
+.trd-desc { font-size: 13px; color: #a0a0a0; line-height: 1.5; margin-bottom: 14px; }
+.trd-meta { display: flex; flex-direction: column; gap: 4px; }
+.trd-meta-row { display: flex; gap: 8px; font-size: 13px; }
+.trd-meta-key { color: #a0a0a0; flex-shrink: 0; width: 130px; }
+.trd-meta-value { color: #e0e0e0; min-width: 0; word-break: break-word; }
+.trd-footer {
+  background: #1e1e1e;
+  border-top: 1px solid #333;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.trd-btn {
+  border-radius: 4px;
+  padding: 6px 24px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.trd-btn-primary { background: #0078d4; border: 1px solid #0078d4; color: #fff; }
+.trd-btn-primary:hover { background: #106ebe; border-color: #106ebe; }
+.trd-btn-secondary { background: transparent; border: 1px solid #3a3a3a; color: #e0e0e0; }
+.trd-btn-secondary:hover { background: #2a2a2a; }
+
 /* ── Trash file viewer content ── */
 .trash-viewer-content {
   flex: 1;

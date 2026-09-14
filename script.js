@@ -3866,9 +3866,17 @@ function renderRecycleList() {
   if (rbStatusCount) rbStatusCount.textContent = `${ordered.length} položek`;
 }
 
+// Windows won't open a file straight out of the Recycle Bin — it has to be restored
+// first. Both the double-click and the context menu route through the restore dialog;
+// only its "Obnovit" button actually opens the viewer (openRecycleItemViewer below).
+// "Restoring" here is a UX step only — the item stays in RECYCLE_ITEMS either way, so
+// double-clicking the same file again always shows the dialog again.
+function openRecycleItem(item) {
+  openTrashRestoreDialog(item);
+}
 // Images open in the same Windows Photos modal Fotky uses; everything else keeps using
 // the existing trash-viewer-window (already a workable Notepad/PDF-style viewer).
-function openRecycleItem(item) {
+function openRecycleItemViewer(item) {
   if (item.type === 'image-blur' || item.type === 'image-missing') openRecycleItemModal(item);
   else openTrashViewer(item);
 }
@@ -3882,17 +3890,51 @@ function openRecycleItemModal(item) {
   openPhotoModal(target, adapted, 'recycle');
 }
 
+// ── "Obnovit soubor" dialog (Windows-style: files can't open directly from the Recycle Bin) ──
+const trashRestoreDialog = document.getElementById('trash-restore-dialog');
+let trashRestorePendingItem = null;
+
+function openTrashRestoreDialog(item) {
+  trashRestorePendingItem = item;
+  document.getElementById('trd-icon').src = item.icon;
+  document.getElementById('trd-icon').alt = item.name;
+  document.getElementById('trd-meta-name').textContent = item.name;
+  document.getElementById('trd-meta-location').textContent = item.originalLocation || '—';
+  document.getElementById('trd-meta-date').textContent = item.deletedDate || '—';
+  trashRestoreDialog.classList.remove('hidden');
+  requestAnimationFrame(() => trashRestoreDialog.classList.add('show'));
+  bringWindowToFront(trashRestoreDialog);
+}
+function closeTrashRestoreDialog() {
+  trashRestorePendingItem = null;
+  trashRestoreDialog.classList.remove('show');
+  setTimeout(() => trashRestoreDialog.classList.add('hidden'), 150);
+}
+document.getElementById('trd-restore-btn').addEventListener('click', () => {
+  const item = trashRestorePendingItem;
+  closeTrashRestoreDialog();
+  if (item) openRecycleItemViewer(item);
+});
+document.getElementById('trd-cancel-btn').addEventListener('click', closeTrashRestoreDialog);
+document.getElementById('trd-close-btn').addEventListener('click', closeTrashRestoreDialog);
+trashRestoreDialog.addEventListener('click', e => { if (e.target === trashRestoreDialog) closeTrashRestoreDialog(); });
+document.addEventListener('keydown', e => {
+  if (trashRestoreDialog.classList.contains('hidden')) return;
+  if (e.key === 'Escape') closeTrashRestoreDialog();
+});
+
 function showRecycleContextMenu(x, y, item) {
   recycleContextMenu.style.left = x + 'px';
   recycleContextMenu.style.top = y + 'px';
   recycleContextMenu.classList.remove('hidden');
+  // Real Windows won't let you view a Recycle Bin item without restoring it first, so
+  // both "Zobrazit" and "Obnovit" lead to the same restore dialog as the double-click.
   const openHandler = () => {
-    openTrashViewer(item);
+    openTrashRestoreDialog(item);
     hideRecycleContextMenu();
   };
-  const restoreHandler = () => hideRecycleContextMenu();
   document.getElementById('context-menu-open').onclick = openHandler;
-  document.getElementById('context-menu-restore').onclick = restoreHandler;
+  document.getElementById('context-menu-restore').onclick = openHandler;
 }
 function hideRecycleContextMenu() {
   recycleContextMenu.classList.add('hidden');

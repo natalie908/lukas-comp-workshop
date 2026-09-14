@@ -433,6 +433,33 @@
     <div class="context-menu-item" id="context-menu-restore">Obnovit</div>
   </div>
 
+  <!-- Koš: Windows-style "Obnovit soubor" dialog — files in the Recycle Bin can't be
+       opened directly, they have to be restored first (real Windows behavior). -->
+  <div id="trash-restore-dialog" class="hidden">
+    <div class="trd-dialog">
+      <div class="trd-titlebar">
+        <span class="trd-titlebar-name">Obnovit soubor</span>
+        <button class="trd-close" id="trd-close-btn" aria-label="Zavřít">✕</button>
+      </div>
+      <div class="trd-body">
+        <img class="trd-icon" id="trd-icon" src="" alt="" />
+        <div class="trd-text">
+          <div class="trd-question">Chcete tento soubor obnovit?</div>
+          <div class="trd-desc">Tento soubor je v Koši. Aby šel otevřít, musí být nejdřív obnoven do své původní složky.</div>
+          <div class="trd-meta">
+            <div class="trd-meta-row"><span class="trd-meta-key">Soubor</span><span class="trd-meta-value" id="trd-meta-name"></span></div>
+            <div class="trd-meta-row"><span class="trd-meta-key">Původní umístění</span><span class="trd-meta-value" id="trd-meta-location"></span></div>
+            <div class="trd-meta-row"><span class="trd-meta-key">Datum smazání</span><span class="trd-meta-value" id="trd-meta-date"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="trd-footer">
+        <button class="trd-btn trd-btn-primary" id="trd-restore-btn">Obnovit</button>
+        <button class="trd-btn trd-btn-secondary" id="trd-cancel-btn">Zrušit</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Counter-Strike 2 launcher window -->
   <div id="cs2-window" class="hidden">
     <div class="cs2-titlebar">
