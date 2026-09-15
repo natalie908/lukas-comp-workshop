@@ -4329,6 +4329,70 @@ const DISCORD = {
           "topic": "disciplína > motivace",
           "messages": [
             {
+              "author": "hidd3nfram3",
+              "lukas": true,
+              "time": "07:15",
+              "date": "3. 1. 2026",
+              "texts": [
+                "den 1 — vstavani v 6, dam si 30 min knihu"
+              ],
+              "reactions": [
+                {
+                  "emoji": "👍",
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "author": "petrwaves",
+              "time": "07:20",
+              "date": "3. 1. 2026",
+              "texts": [
+                "respekt, drz to"
+              ]
+            },
+            {
+              "author": "hidd3nfram3",
+              "lukas": true,
+              "time": "06:52",
+              "date": "8. 1. 2026",
+              "texts": [
+                "ranni rutina 5/8. dnes jsem to zvladl"
+              ],
+              "reactions": [
+                {
+                  "emoji": "🔥",
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "author": "hidd3nfram3",
+              "lukas": true,
+              "time": "07:40",
+              "date": "15. 1. 2026",
+              "texts": [
+                "vypadl mi den, zase v poho"
+              ]
+            },
+            {
+              "author": "disciplined_v",
+              "time": "07:45",
+              "date": "15. 1. 2026",
+              "texts": [
+                "hlavni ze pokracujes"
+              ]
+            },
+            {
+              "author": "hidd3nfram3",
+              "lukas": true,
+              "time": "09:12",
+              "date": "28. 1. 2026",
+              "texts": [
+                "nezvladam to. asi to nedava smysl"
+              ]
+            },
+            {
               "author": "petrwaves",
               "time": "06:02",
               "date": "20. 3. 2026",
@@ -4376,6 +4440,21 @@ const DISCORD = {
           "name": "knihy-a-podcasty",
           "topic": "self-improvement zdroje",
           "messages": [
+            {
+              "author": "hidd3nfram3",
+              "lukas": true,
+              "time": "21:30",
+              "date": "12. 1. 2026",
+              "texts": [
+                "nekdo cet Atomic Habits? sto stranek za mnou"
+              ],
+              "reactions": [
+                {
+                  "emoji": "👍",
+                  "count": 1
+                }
+              ]
+            },
             {
               "author": "avxrtex",
               "time": "19:30",
