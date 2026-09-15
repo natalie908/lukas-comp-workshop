@@ -138,7 +138,7 @@ const CHATGPT_CONVERSATIONS = [
       },
       {
         "role": "ChatGPT",
-        "text": "Protože v květnu jsi napsal „co je canthal tilt\" a odešel. Dneska ses přihlásil s promptem, který má obcházet ochranu. To je jiná otázka a odpovídám na ni jinak. Nejsem naštvaný, nechci ti kázat. Ale nebudu předstírat, že si nevšímám, jak jsi dneska napsal první větu."
+        "text": "Protože před dvěma týdny jsi napsal „co je canthal tilt\" a odešel. Dneska ses přihlásil s promptem, který má obcházet ochranu. To je jiná otázka a odpovídám na ni jinak. Nejsem naštvaný, nechci ti kázat. Ale nebudu předstírat, že si nevšímám, jak jsi dneska napsal první větu."
       },
       {
         "role": "Lukáš",
@@ -252,7 +252,7 @@ const CHATGPT_CONVERSATIONS = [
   },
   {
     "titul": "Alfa beta teorie vztahů",
-    "datum": "\t1. 3. 2026",
+    "datum": "1. 3. 2026",
     "zpravy": [
       {
         "role": "Lukáš",
@@ -286,7 +286,7 @@ const CHATGPT_CONVERSATIONS = [
   },
   {
     "titul": "Zájem o spolužačku",
-    "datum": "\t16. 2. 2026",
+    "datum": "16. 2. 2026",
     "zpravy": [
       {
         "role": "Lukáš",
