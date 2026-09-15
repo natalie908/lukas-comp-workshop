@@ -6860,12 +6860,12 @@ const SELF_DATA_METRICS = [
     "hodnoty": [
       3.4,
       3.7,
-      3.1,
-      4,
-      3.7,
-      3.4,
-      3.7,
       3.1
+    ],
+    "data": [
+      "20. 2.",
+      "5. 3.",
+      "22. 3."
     ]
   },
   {
@@ -6913,6 +6913,11 @@ function selfDataTrendText(metric) {
   const delta = values[values.length - 1] - values[0];
   const deltaNum = Number.isInteger(delta) ? delta : Math.round(delta * 10) / 10;
   const deltaStr = (deltaNum > 0 ? '+' : '') + deltaNum;
+  // Metrics tied to specific dated events (e.g. Facerate submissions) rather than a
+  // uniform 8-week trend carry their own "data" labels — use those instead when present.
+  if (metric.data && metric.data.length === values.length) {
+    return `${deltaStr}${metric.jednotka || ''} (${metric.data[0]} – ${metric.data[metric.data.length - 1]})`;
+  }
   return `${deltaStr}${metric.jednotka || ''} za 8 týdnů`;
 }
 
