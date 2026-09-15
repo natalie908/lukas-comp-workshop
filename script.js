@@ -1236,6 +1236,116 @@ const HISTORY_DAYS = [
     ]
   },
   {
+    "date": "31. 1. 2026",
+    "items": [
+      {
+        "time": "21:15",
+        "title": "jak přestat prokrastinovat - Hledat Googlem",
+        "url": "google.com/search?q=jak+prestat+prokrastinovat"
+      },
+      {
+        "time": "20:40",
+        "title": "Ali Abdaal: How I Study For Exams - YouTube",
+        "url": "youtube.com/watch?v=aa902"
+      }
+    ]
+  },
+  {
+    "date": "24. 1. 2026",
+    "items": [
+      {
+        "time": "19:24",
+        "title": "florbalplzen.cz — přihlášení",
+        "url": "florbalplzen.cz"
+      },
+      {
+        "time": "19:20",
+        "title": "florbal Plzeň mladší dorost - Hledat Googlem",
+        "url": "google.com/search?q=florbal+Plzen+mladsi+dorost"
+      },
+      {
+        "time": "18:10",
+        "title": "Kovy: co jsem se naučil v 18 - YouTube",
+        "url": "youtube.com/watch?v=kv901"
+      }
+    ]
+  },
+  {
+    "date": "17. 1. 2026",
+    "items": [
+      {
+        "time": "20:15",
+        "title": "jak se ozvat starýmu kamarádovi - Hledat Googlem",
+        "url": "google.com/search?q=jak+se+ozvat+staremu+kamaradovi"
+      },
+      {
+        "time": "18:44",
+        "title": "dzs.cz — Erasmus+ pro střední školy",
+        "url": "dzs.cz"
+      },
+      {
+        "time": "18:40",
+        "title": "Erasmus středoškolák podmínky - Hledat Googlem",
+        "url": "google.com/search?q=Erasmus+stredoskolak+podminky"
+      }
+    ]
+  },
+  {
+    "date": "10. 1. 2026",
+    "items": [
+      {
+        "time": "19:50",
+        "title": "jak si udělat rozvrh na týden - Hledat Googlem",
+        "url": "google.com/search?q=jak+si+udelat+rozvrh+na+tyden"
+      },
+      {
+        "time": "19:30",
+        "title": "Thomas Frank: 5 Best Study Techniques - YouTube",
+        "url": "youtube.com/watch?v=tf904"
+      },
+      {
+        "time": "19:05",
+        "title": "Karel Otýpka: první semestr - YouTube",
+        "url": "youtube.com/watch?v=ko903"
+      }
+    ]
+  },
+  {
+    "date": "5. 1. 2026",
+    "items": [
+      {
+        "time": "21:00",
+        "title": "Ali Abdaal: My New Year Reset - YouTube",
+        "url": "youtube.com/watch?v=aa906"
+      },
+      {
+        "time": "20:35",
+        "title": "Kovy: novej rok, novej ja - YouTube",
+        "url": "youtube.com/watch?v=kv905"
+      },
+      {
+        "time": "20:10",
+        "title": "novoroční předsevzetí co funguje - Hledat Googlem",
+        "url": "google.com/search?q=novorocni+predsevzeti+co+funguje"
+      }
+    ]
+  },
+  {
+    "date": "2. 1. 2026",
+    "items": [
+      {
+        "time": "06:40",
+        "title": "ranní rutina pro studenty - Hledat Googlem",
+        "url": "google.com/search?q=ranni+rutina+pro+studenty"
+      },
+      {
+        "time": "06:15",
+        "title": "jak brzo vstávat - Hledat Googlem",
+        "url": "google.com/search?q=jak+brzo+vstavat"
+      }
+    ]
+  },
+  {
     "date": "5. 12. 2025",
     "items": [
       {
