@@ -341,13 +341,28 @@ const CHATGPT_CONVERSATIONS = [
 // ── Browsing history (chronological, newest day first) ──
 const HISTORY_DAYS = [
   {
-    "date": "24. 3. 2026",
+    "date": "27. 3. 2026",
     "items": [
       {
-        "time": "02:43",
-        "title": "ChatGPT – Otázka o hypergamii",
-        "url": "chat.openai.com/c/6f2a91d0-8b3e-4c1a-9f2d-3a7e5c0b1d44"
+        "time": "23:47",
+        "title": "ChatGPT – Looksmaxxing plán pro 15",
+        "url": "chat.openai.com/c/4b10d630-9d8e-449f-a414-c4ce1e6d6c4b"
       },
+      {
+        "time": "23:20",
+        "title": "reddit.com/r/looksmax",
+        "url": "reddit.com/r/looksmax"
+      },
+      {
+        "time": "22:50",
+        "title": "PSL scale sub 5 explained - Hledat Googlem",
+        "url": "google.com/search?q=PSL+scale+sub+5+explained"
+      }
+    ]
+  },
+  {
+    "date": "24. 3. 2026",
+    "items": [
       {
         "time": "02:11",
         "title": "reddit.com/r/looksmax",
@@ -529,6 +544,11 @@ const HISTORY_DAYS = [
     "date": "15. 3. 2026",
     "items": [
       {
+        "time": "22:47",
+        "title": "ChatGPT – Zlepšení vzhledu v 15",
+        "url": "chat.openai.com/c/1227403e-d9d3-4912-a258-5e3d659d7602"
+      },
+      {
         "time": "21:11",
         "title": "framecel test - Hledat Googlem",
         "url": "google.com/search?q=framecel+test"
@@ -558,11 +578,6 @@ const HISTORY_DAYS = [
   {
     "date": "14. 3. 2026",
     "items": [
-      {
-        "time": "01:27",
-        "title": "ChatGPT – Nefunguje to",
-        "url": "chat.openai.com/c/2c7d4e18-1a9f-4b6c-8e3a-9d0f6b2c7a15"
-      },
       {
         "time": "00:58",
         "title": "facerate.io/upload",
@@ -624,6 +639,11 @@ const HISTORY_DAYS = [
     "date": "9. 3. 2026",
     "items": [
       {
+        "time": "23:58",
+        "title": "ChatGPT – Vysvětlení pojmů canthal tilt",
+        "url": "chat.openai.com/c/bfdc2ee4-71cf-4041-962c-80fa1a42f817"
+      },
+      {
         "time": "23:50",
         "title": "facerate.io/upload",
         "url": "facerate.io/upload"
@@ -663,11 +683,6 @@ const HISTORY_DAYS = [
   {
     "date": "7. 3. 2026",
     "items": [
-      {
-        "time": "23:11",
-        "title": "ChatGPT – Statistika",
-        "url": "chat.openai.com/c/9a1b3f52-6e7d-4a2c-b8f1-0c5d9e3a7b62"
-      },
       {
         "time": "20:44",
         "title": "Sneako: Tinder Gini coefficient breakdown - YouTube",
@@ -774,6 +789,11 @@ const HISTORY_DAYS = [
     "date": "1. 3. 2026",
     "items": [
       {
+        "time": "23:52",
+        "title": "ChatGPT – Alfa beta teorie vztahů",
+        "url": "chat.openai.com/c/1a323820-effb-4906-85ff-ff505cce60fb"
+      },
+      {
         "time": "23:40",
         "title": "Sneako: why women reject you - YouTube",
         "url": "youtube.com/watch?v=sn035"
@@ -798,11 +818,6 @@ const HISTORY_DAYS = [
   {
     "date": "28. 2. 2026",
     "items": [
-      {
-        "time": "21:03",
-        "title": "ChatGPT – Mewing a symetrie",
-        "url": "chat.openai.com/c/4d8e2a97-3c1b-4f5a-a6e8-7b9c1d4f2e30"
-      },
       {
         "time": "19:12",
         "title": "Mewing before after: 6 months progress - YouTube",
@@ -939,11 +954,6 @@ const HISTORY_DAYS = [
     "date": "18. 2. 2026",
     "items": [
       {
-        "time": "22:14",
-        "title": "ChatGPT – Vzhled",
-        "url": "chat.openai.com/c/7e0c5b31-4f9a-4d2e-9b3c-1a8d6e0f4c73"
-      },
-      {
         "time": "19:41",
         "title": "facerate.io/upload",
         "url": "facerate.io/upload"
@@ -973,6 +983,11 @@ const HISTORY_DAYS = [
   {
     "date": "16. 2. 2026",
     "items": [
+      {
+        "time": "23:22",
+        "title": "ChatGPT – Zájem o spolužačku",
+        "url": "chat.openai.com/c/9ffa8ef6-3429-4f9f-af90-9891809efdf2"
+      },
       {
         "time": "23:05",
         "title": "jak vypadat starší a zralejší - Hledat Googlem",
@@ -1032,6 +1047,11 @@ const HISTORY_DAYS = [
         "time": "19:50",
         "title": "dělá šachy kluka zajímavějším pro holky - Hledat Googlem",
         "url": "google.com/search?q=dela+sachy+kluka+zajimavejsim+pro+holky"
+      },
+      {
+        "time": "18:15",
+        "title": "ChatGPT – Vysvětlení exponenciální funkce do hodiny matematiky",
+        "url": "chat.openai.com/c/9fe5b55e-3df3-4a44-95db-b6fdde7d0bb3"
       }
     ]
   },
@@ -1118,11 +1138,6 @@ const HISTORY_DAYS = [
   {
     "date": "5. 2. 2026",
     "items": [
-      {
-        "time": "20:47",
-        "title": "ChatGPT – Nemůžu se soustředit ve škole",
-        "url": "chat.openai.com/c/1f4a7c02-9e8b-4d1a-8c6f-5b3e2a9d0f17"
-      },
       {
         "time": "19:33",
         "title": "wikihow.com – Study Tips",
