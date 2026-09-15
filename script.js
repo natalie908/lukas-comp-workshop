@@ -4290,7 +4290,7 @@ const DISCORD = {
             {
               "author": "mod_glowup",
               "time": "12:00",
-              "date": "1. 1. 2026",
+              "date": "6. 3. 2026",
               "texts": [
                 "📌 PRAVIDLA SERVERU",
                 "1. žádný cope, jen fakta a PSL",
