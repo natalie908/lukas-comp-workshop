@@ -4534,6 +4534,11 @@ const DISCORD = {
           ]
         },
         {
+          "name": "vc — night mog",
+          "type": "voice",
+          "topic": ""
+        },
+        {
           "name": "memy",
           "topic": "wojak nation",
           "messages": [
@@ -4604,10 +4609,8 @@ const DISCORD = {
           "aleph_null",
           "ash_pilled",
           "Frame_God",
-          "KOROLEV_88",
           "mchmch",
-          "MTN_max",
-          "hidd3nfram3"
+          "MTN_max"
         ],
         "offline": [
           "glow_v3",
@@ -4615,8 +4618,14 @@ const DISCORD = {
           "dr3ad_v2",
           "someguy_23",
           "newcel_2010",
-          "mod_glowup"
+          "mod_glowup",
+          "KOROLEV_88",
+          "hidd3nfram3"
         ]
+      },
+      "statuses": {
+        "KOROLEV_88": "Praha 28.3. 🚂",
+        "hidd3nfram3": "asi"
       }
     }
   ],
@@ -4706,10 +4715,11 @@ function renderChannelPanel() {
   discordChannelList.innerHTML = server.channels.map(ch => {
     const isActive = ch.name === server.activeChannel;
     const isUnread = server.id === 'looksmaxx' && ch.name === 'self-hate-mondays' && !isActive;
+    const isVoice = ch.type === 'voice';
     return `
       <div class="discord-channel-item${isActive ? ' active' : ''}${isUnread ? ' unread' : ''}" data-channel="${ch.name}">
-        <span class="discord-hash">#</span>
-        <span class="discord-channel-name-text">${ch.name}</span>
+        <span class="discord-hash">${isVoice ? '🔊' : '#'}</span>
+        <span class="discord-channel-name-text">${ch.name}${isVoice ? ' (0)' : ''}</span>
       </div>
     `;
   }).join('');
@@ -4799,7 +4809,15 @@ function renderServerChannel() {
     discordMessages.innerHTML = '<div class="discord-empty-state">Žádné kanály</div>';
     discordInput.classList.add('hidden');
     discordMemberPanel.classList.remove('hidden');
-    discordMemberPanel.innerHTML = renderMembers(server.members);
+    discordMemberPanel.innerHTML = renderMembers(server);
+    return;
+  }
+  if (channel.type === 'voice') {
+    discordMainHeader.innerHTML = `<span class="discord-hash">🔊</span><span>${channel.name}</span>`;
+    discordMessages.innerHTML = '<div class="discord-empty-state">Hlasový kanál&nbsp;&nbsp;·&nbsp;&nbsp;žádní uživatelé</div>';
+    discordInput.classList.add('hidden');
+    discordMemberPanel.classList.remove('hidden');
+    discordMemberPanel.innerHTML = renderMembers(server);
     return;
   }
   discordMainHeader.innerHTML = `<span class="discord-hash">#</span><span>${channel.name}</span><span class="discord-topic">${channel.topic}</span>`;
@@ -4810,19 +4828,25 @@ function renderServerChannel() {
 
   // Member panel
   discordMemberPanel.classList.remove('hidden');
-  discordMemberPanel.innerHTML = renderMembers(server.members);
+  discordMemberPanel.innerHTML = renderMembers(server);
 }
 
-function renderMembers(members) {
+function renderMembers(server) {
+  const members = server.members;
+  const statuses = server.statuses || {};
   const memberRow = (nick, online) => {
     const isLukas = nick === 'hidd3nfram3';
     const av = isLukas
       ? '<span class="discord-avatar discord-avatar-default"></span>'
       : `<span class="discord-avatar" style="background:${discordAvatarColor(nick)}">${nick.charAt(0).toUpperCase()}</span>`;
+    const status = statuses[nick];
     return `
       <div class="discord-member ${online ? 'online-member' : ''}${isLukas ? ' is-lukas' : ''}">
         <span class="discord-member-avatar-wrap">${av}<span class="discord-member-status-dot ${online ? 'online' : 'offline'}"></span></span>
-        <span class="discord-member-name">${nick}</span>
+        <span class="discord-member-text">
+          <span class="discord-member-name">${nick}</span>
+          ${status ? `<span class="discord-member-status-text">${status}</span>` : ''}
+        </span>
       </div>
     `;
   };
