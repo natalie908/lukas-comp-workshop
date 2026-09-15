@@ -4536,7 +4536,22 @@ const DISCORD = {
         {
           "name": "vc — night mog",
           "type": "voice",
-          "topic": ""
+          "topic": "",
+          "messages": [
+            {
+              "author": "KOROLEV_88",
+              "time": "22:04",
+              "date": "26. 3. 2026",
+              "texts": [
+                "sobota Praha 12:00 vinohrady 🚂 kdo?"
+              ],
+              "reactions": [
+                { "emoji": "🚂", "count": 1 },
+                { "emoji": "🗿", "count": 1 },
+                { "emoji": "🔥", "count": 1 }
+              ]
+            }
+          ]
         },
         {
           "name": "memy",
@@ -4621,10 +4636,6 @@ const DISCORD = {
           "mod_glowup",
           "hidd3nfram3"
         ]
-      },
-      "statuses": {
-        "KOROLEV_88": "Praha 28.3. 🚂",
-        "hidd3nfram3": "asi"
       },
       "roles": [
         { "key": "mentor", "label": "MENTOR", "color": "#eb459e", "icon": "🌹" }
@@ -4817,18 +4828,13 @@ function renderServerChannel() {
     discordMemberPanel.innerHTML = renderMembers(server);
     return;
   }
-  if (channel.type === 'voice') {
-    discordMainHeader.innerHTML = `<span class="discord-hash">🔊</span><span>${channel.name}</span>`;
-    discordMessages.innerHTML = '<div class="discord-empty-state">Hlasový kanál&nbsp;&nbsp;·&nbsp;&nbsp;žádní uživatelé</div>';
-    discordInput.classList.add('hidden');
-    discordMemberPanel.classList.remove('hidden');
-    discordMemberPanel.innerHTML = renderMembers(server);
-    return;
-  }
-  discordMainHeader.innerHTML = `<span class="discord-hash">#</span><span>${channel.name}</span><span class="discord-topic">${channel.topic}</span>`;
-  discordMessages.innerHTML = renderMessageBlocks(channel.messages);
+  // Voice channels get Discord's usual built-in text chat too — same rendering
+  // path as a text channel, just with a 🔊 header icon instead of #.
+  const isVoiceChannel = channel.type === 'voice';
+  discordMainHeader.innerHTML = `<span class="discord-hash">${isVoiceChannel ? '🔊' : '#'}</span><span>${channel.name}</span><span class="discord-topic">${channel.topic}</span>`;
+  discordMessages.innerHTML = renderMessageBlocks(channel.messages || []);
   discordMessages.scrollTop = discordMessages.scrollHeight;
-  discordInputBox.textContent = `Napsat zprávu do #${channel.name}`;
+  discordInputBox.textContent = `Napsat zprávu do ${isVoiceChannel ? channel.name : '#' + channel.name}`;
   discordInput.classList.remove('hidden');
 
   // Member panel
