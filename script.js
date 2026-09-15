@@ -4543,7 +4543,7 @@ const DISCORD = {
               "time": "22:04",
               "date": "26. 3. 2026",
               "texts": [
-                "sobota Praha 12:00 vinohrady 🚂 kdo?"
+                "sobota Praha v 8 vinohrady 🚂 kdo?"
               ],
               "reactions": [
                 { "emoji": "🚂", "count": 1 },
