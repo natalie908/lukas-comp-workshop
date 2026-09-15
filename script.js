@@ -5183,7 +5183,7 @@ const PHOTOS_TREE = {
       "children": [
         {
           "type": "file",
-          "name": "Screenshot 2026-02-25 110223",
+          "name": "Screenshot 2026-02-22 110223",
           "date": "22. 2. 2026",
           "size": "1,1 MB",
           "dims": "1280 × 720",
@@ -5203,7 +5203,7 @@ const PHOTOS_TREE = {
         },
         {
           "type": "file",
-          "name": "Screenshot 2026-04-03 110223",
+          "name": "Screenshot 2026-03-04 110223",
           "date": "4. 3. 2026",
           "size": "620 KB",
           "dims": "1280 × 720",
@@ -5253,7 +5253,7 @@ const PHOTOS_TREE = {
         },
         {
           "type": "file",
-          "name": "PXL_20260318_164521.jpg",
+          "name": "PXL_20260313_164521.jpg",
           "date": "13. 3. 2026",
           "size": "160 KB",
           "dims": "1024 × 640",
@@ -5265,7 +5265,7 @@ const PHOTOS_TREE = {
         },
         {
           "type": "file",
-          "name": "20260807_174238.jpg",
+          "name": "20260314_174238.jpg",
           "date": "14. 3. 2026",
           "size": "150 KB",
           "dims": "900 × 600",
@@ -5510,7 +5510,7 @@ const PHOTOS_TREE = {
             },
             {
               "type": "file",
-              "name": "20260803_145827.jpg",
+              "name": "20260319_145827.jpg",
               "date": "19. 3. 2026",
               "size": "430 KB",
               "dims": "800 × 800",
