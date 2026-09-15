@@ -4619,13 +4619,18 @@ const DISCORD = {
           "someguy_23",
           "newcel_2010",
           "mod_glowup",
-          "KOROLEV_88",
           "hidd3nfram3"
         ]
       },
       "statuses": {
         "KOROLEV_88": "Praha 28.3. 🚂",
         "hidd3nfram3": "asi"
+      },
+      "roles": [
+        { "key": "mentor", "label": "MENTOR", "color": "#eb459e", "icon": "🌹" }
+      ],
+      "memberRoles": {
+        "KOROLEV_88": "mentor"
       }
     }
   ],
@@ -4834,27 +4839,43 @@ function renderServerChannel() {
 function renderMembers(server) {
   const members = server.members;
   const statuses = server.statuses || {};
-  const memberRow = (nick, online) => {
+  const roles = server.roles || [];
+  const memberRoles = server.memberRoles || {};
+  const memberRow = (nick, online, role) => {
     const isLukas = nick === 'hidd3nfram3';
     const av = isLukas
       ? '<span class="discord-avatar discord-avatar-default"></span>'
       : `<span class="discord-avatar" style="background:${discordAvatarColor(nick)}">${nick.charAt(0).toUpperCase()}</span>`;
     const status = statuses[nick];
+    const nameStyle = role ? ` style="color:${role.color}"` : '';
+    const roleIcon = role ? `<span class="discord-member-role-icon">${role.icon}</span>` : '';
     return `
       <div class="discord-member ${online ? 'online-member' : ''}${isLukas ? ' is-lukas' : ''}">
         <span class="discord-member-avatar-wrap">${av}<span class="discord-member-status-dot ${online ? 'online' : 'offline'}"></span></span>
+        ${roleIcon}
         <span class="discord-member-text">
-          <span class="discord-member-name">${nick}</span>
+          <span class="discord-member-name"${nameStyle}>${nick}</span>
           ${status ? `<span class="discord-member-status-text">${status}</span>` : ''}
         </span>
       </div>
     `;
   };
   let html = '';
-  html += `<div class="discord-member-group-title">Online — ${members.online.length}</div>`;
-  html += members.online.map(n => memberRow(n, true)).join('');
-  html += `<div class="discord-member-group-title">Offline — ${members.offline.length}</div>`;
-  html += members.offline.map(n => memberRow(n, false)).join('');
+  // Role groups hoisted above ONLINE/OFFLINE — members with a role are excluded
+  // from those two lists below so they only ever appear once.
+  const roleMemberNicks = new Set(Object.keys(memberRoles));
+  roles.forEach(role => {
+    const nicks = Object.keys(memberRoles).filter(n => memberRoles[n] === role.key);
+    if (!nicks.length) return;
+    html += `<div class="discord-member-group-title">${role.label} — ${nicks.length}</div>`;
+    html += nicks.map(n => memberRow(n, members.online.includes(n), role)).join('');
+  });
+  const onlineList = members.online.filter(n => !roleMemberNicks.has(n));
+  const offlineList = members.offline.filter(n => !roleMemberNicks.has(n));
+  html += `<div class="discord-member-group-title">Online — ${onlineList.length}</div>`;
+  html += onlineList.map(n => memberRow(n, true)).join('');
+  html += `<div class="discord-member-group-title">Offline — ${offlineList.length}</div>`;
+  html += offlineList.map(n => memberRow(n, false)).join('');
   return html;
 }
 
